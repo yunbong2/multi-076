@@ -369,6 +369,7 @@ class Controls:
     if self.enabled != self.controlsAllowed and self.controlsAllowed:
       if CS.vEgo > 1.0 and CS.gearShifter == 2:
         self.enabled = True
+        self.active = True
     
     print( 'enable={} active={} controlsAllowed={}'.format( self.enabled, self.active, self.controlsAllowed ) )
 
