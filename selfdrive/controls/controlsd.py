@@ -140,6 +140,8 @@ class Controls:
     self.events_prev = []
     self.current_alert_types = []
 
+    self.controlsAllowed = 0
+
     self.sm['liveCalibration'].calStatus = Calibration.INVALID
     self.sm['thermal'].freeSpace = 1.
     self.sm['dMonitoringState'].events = []
@@ -363,7 +365,12 @@ class Controls:
     # Check if openpilot is engaged
     self.enabled = self.active or self.state == State.preEnabled
 
-    #print( 'enable={} self.active={}'.format( self.enabled, self.active ) )
+
+    if self.enabled != self.controlsAllowed and self.controlsAllowed:
+      if CS.vEgo > 1.0 and CS.gearShifter == 2:
+        self.enabled = True
+    
+    print( 'enable={} self.active={} self.controlsAllowed={}'.format( self.enabled, self.active, self.controlsAllowed ) )
 
   def state_control(self, CS):
     """Given the state, this function returns an actuators packet"""
@@ -433,7 +440,8 @@ class Controls:
     log_alertTextMsg1 = trace1.global_alertTextMsg1
     log_alertTextMsg2 = trace1.global_alertTextMsg2
 
-    log_alertTextMsg1 += ' ctrl={}'.format( self.sm['health'].controlsAllowed )
+    self.controlsAllowed = self.sm['health'].controlsAllowed
+    log_alertTextMsg1 += ' ctrl={}'.format( self.controlsAllowed )
     # trace1.printf( '' )
     
 
