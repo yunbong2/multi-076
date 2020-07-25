@@ -221,6 +221,9 @@ class CarController():
     elif self.steer_torque_ratio > 1:
       self.steer_torque_ratio = 1
 
+
+    print( 'self.steer_torque_ratio={} {}{} self.param_OpkrWhoisDriver ={}'.format( self.steer_torque_ratio, ratio_mval, ratio_pval, self.param_OpkrWhoisDriver ) )
+
     return  param
 
   def param_load(self ):
