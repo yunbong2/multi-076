@@ -197,12 +197,15 @@ class CarController():
     # smoth torque enable or disable
     ratio_pval = 0.001  # 10 sec
     ratio_mval = 0.001  # 10 sec
-    if self.param_OpkrWhoisDriver == 1: # 민감
+    if self.param_OpkrWhoisDriver == 1: # 높음
       ratio_pval = 0.005  # 2 sec
-      ratio_mval = 0.01   # 1 sec
-    else:  # 보통.
+      ratio_mval = 0.05   # 0.5 sec
+    if self.param_OpkrWhoisDriver == 2: # 중간
       ratio_pval = 0.002   # 5 sec    
-      ratio_mval = 0.005   # 2 sec   
+      ratio_mval = 0.05   # 0.5 sec   
+    else:  # 낮음.
+      ratio_pval = 0.001   # 10 sec    
+      ratio_mval = 0.05   # 0.5 sec   
 
     if self.param_OpkrWhoisDriver == 0:
       self.steer_torque_ratio = 1
