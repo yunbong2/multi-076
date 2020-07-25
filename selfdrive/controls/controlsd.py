@@ -370,7 +370,7 @@ class Controls:
       if CS.vEgo > 1.0 and CS.gearShifter == 2:
         self.enabled = True
     
-    print( 'enable={} self.active={} self.controlsAllowed={}'.format( self.enabled, self.active, self.controlsAllowed ) )
+    print( 'enable={} active={} controlsAllowed={}'.format( self.enabled, self.active, self.controlsAllowed ) )
 
   def state_control(self, CS):
     """Given the state, this function returns an actuators packet"""
