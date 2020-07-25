@@ -198,14 +198,14 @@ class CarController():
     ratio_pval = 0.001  # 10 sec
     ratio_mval = 0.001  # 10 sec
     if self.param_OpkrWhoisDriver == 1: # 높음
-      ratio_mval = 0.005  # 2 sec
-      ratio_pval = 0.05   # 0.5 sec
+      ratio_pval = 0.005  # 2 sec
+      ratio_mval = 0.05   # 0.5 sec
     if self.param_OpkrWhoisDriver == 2: # 중간
-      ratio_mval = 0.002   # 5 sec    
-      ratio_pval = 0.05   # 0.5 sec   
+      ratio_pval = 0.002   # 5 sec    
+      ratio_mval = 0.05   # 0.5 sec   
     else:  # 낮음.
-      ratio_mval = 0.001   # 10 sec    
-      ratio_pval = 0.05   # 0.5 sec   
+      ratio_pval = 0.001   # 10 sec    
+      ratio_mval = 0.05   # 0.5 sec   
 
     if self.param_OpkrWhoisDriver == 0:
       self.steer_torque_ratio = 1
@@ -222,7 +222,7 @@ class CarController():
       self.steer_torque_ratio = 1
 
 
-    print( 'self.steer_torque_ratio={} {}{} self.param_OpkrWhoisDriver ={}'.format( self.steer_torque_ratio, ratio_mval, ratio_pval, self.param_OpkrWhoisDriver ) )
+    print( 'self.steer_torque_ratio={} {}{} self.param_OpkrWhoisDriver={}'.format( self.steer_torque_ratio, ratio_mval, ratio_pval, self.param_OpkrWhoisDriver ) )
 
     return  param
 
