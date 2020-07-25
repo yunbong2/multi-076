@@ -983,7 +983,7 @@ static void ui_draw_debug(UIState *s)
   nvgFontSize(s->vg, 36*1.5*fFontSize);
 
 
-  ui_print( s, ui_viz_rx+10, 50, "S:%d",  s->awake_timeout/30. );
+  ui_print( s, ui_viz_rx+10, 50, "S:%d",  s->awake_timeout );
 
   //x_pos = ui_viz_rx + 300;
   //y_pos = 100; 
