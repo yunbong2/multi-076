@@ -20,7 +20,7 @@
   "sR_KpV2": [0.20, 0.22, 0.24, 0.26],
   "sR_boostV": [0.0, 0.3, 0.7, 1.0],
   "steerActuatorDelay": 0.3,
-  "steerLimitTimer": 0.1,
+  "steerLimitTimer": 0.4,
   "steerOffset": 0.0,
   "steerRateCost": 0.45,
   "steerRatio": 14.5,
