@@ -1058,7 +1058,7 @@ int main(int argc, char* argv[]) {
       if( is_awake_command || nAwakeTime == 0 || scene.cruiseState.standstill  )
       {
         is_awake_command = false;
-        set_awake(s, true, 30);
+        set_awake(s, true, nTimeOff);
       }
         
 
