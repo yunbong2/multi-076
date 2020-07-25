@@ -8,7 +8,6 @@ from selfdrive.swaglog import cloudlog
 from common.params import Params, put_nonblocking
 params = Params()
 
-#android_packages = ("com.google.android.inputmethod.korean", "com.mixplorer", "com.rhmsoft.edit.pro", "kr.mappers.AtlanSmart", "kt.navi", "com.skt.tmap.ku", "com.locnall.KimGiSa", "com.gmd.hidesoftkeys", "ai.comma.plus.offroad")
 android_packages = ("com.google.android.inputmethod.korean", "com.mixplorer", "com.rhmsoft.edit.pro", "com.skt.tmap.ku", "com.gmd.hidesoftkeys", "ai.comma.plus.offroad")
 
 def get_installed_apks():
@@ -36,19 +35,13 @@ def start_offroad():
   system("pm disable com.rhmsoft.edit.pro")
   system("pm disable com.skt.tmap.ku")
   system("pm disable com.gmd.hidesoftkeys")
-  opkr_boot_softkey = True if params.get("OpkrBootSoftkey", encoding='utf8') == "1" else False
-  opkr_boot_tmap = True if params.get("OpkrBootTmap", encoding='utf8') == "1" else False
+  opkr_boot_navigation = True if params.get("OpkrBootNavigation", encoding='utf8') == "1" else False
 
   system("am start -n ai.comma.plus.offroad/.MainActivity")
 
-  if opkr_boot_softkey:
+  if opkr_boot_navigation:
     system("pm enable com.gmd.hidesoftkeys")
     system("am start -n com.gmd.hidesoftkeys/com.gmd.hidesoftkeys.MainActivity")
-
-  if opkr_boot_tmap:
-    if not opkr_boot_softkey:
-      system("pm enable com.gmd.hidesoftkeys")
-      system("am start -n com.gmd.hidesoftkeys/com.gmd.hidesoftkeys.MainActivity")
     system("pm enable com.skt.tmap.ku")
     system("am start -n com.skt.tmap.ku/com.skt.tmap.activity.TmapNaviActivity")
     
