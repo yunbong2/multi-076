@@ -71,12 +71,11 @@ class ParamsLearner:
 
 
 def main(sm=None, pm=None):
-  print('error => paramsd.py  1 ')
   if sm is None:
     sm = messaging.SubMaster(['liveLocationKalman', 'carState'])
   if pm is None:
     pm = messaging.PubMaster(['liveParameters'])
-  print('error => paramsd.py  2 ')
+
   params_reader = Params()
   # wait for stats about the car to come in from controls
   cloudlog.info("paramsd is waiting for CarParams")
@@ -84,7 +83,7 @@ def main(sm=None, pm=None):
   cloudlog.info("paramsd got CarParams")
 
   params = params_reader.get("LiveParameters")
-  print('error => paramsd.py  3 ')
+
   # Check if car model matches
   if params is not None:
     params = json.loads(params)
@@ -103,18 +102,17 @@ def main(sm=None, pm=None):
 
   learner = ParamsLearner(CP, params['steerRatio'], params['stiffnessFactor'], math.radians(params['angleOffsetAverage']))
   min_sr, max_sr = 0.5 * CP.steerRatio, 2.0 * CP.steerRatio
-  print('error => paramsd.py  4 ')
+
   i = 0
   while True:
     sm.update()
-    print('error => paramsd.py  11 ')
+
     for which, updated in sm.updated.items():
       if not updated:
         continue
       t = sm.logMonoTime[which] * 1e-9
       learner.handle_log(t, which, sm[which])
 
-    print('error => paramsd.py  122 ')
     # TODO: set valid to false when locationd stops sending
     # TODO: make sure controlsd knows when there is no gyro
 
@@ -149,10 +147,6 @@ def main(sm=None, pm=None):
         put_nonblocking("LiveParameters", json.dumps(params))
 
       pm.send('liveParameters', msg)
-      print('ok => paramsd.py  ={} '.format(msg) )
-
-    else:
-      print('error => paramsd.py   ')
 
 
 if __name__ == "__main__":
