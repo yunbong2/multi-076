@@ -985,8 +985,8 @@ static void ui_draw_debug(UIState *s)
 
   ui_print( s, ui_viz_rx+10, 50, "S:%d",  s->awake_timeout );
 
-  x_pos = ui_viz_rx + 300;
-  y_pos = 100; 
+  //x_pos = ui_viz_rx + 300;
+  //y_pos = 100; 
   //ui_print( s, x_pos, y_pos+0, "B:%d,%.5f", scene.steerOverride, scene.output_scale );
   //#ui_print( s, x_pos, y_pos+150, "blindspot L:%d, R:%d", scene.leftBlindspot, scene.rightBlindspot  );
 
@@ -995,7 +995,7 @@ static void ui_draw_debug(UIState *s)
 
   //ui_print( s, x_pos, y_pos+250, "Wheel:%.1f,%.1f,%.1f,%.1f", scene.wheel.fl, scene.wheel.fr, scene.wheel.rl, scene.wheel.rr );
 
-  ui_print( s, x_pos, y_pos+0, "%d, %d, %d, %d, %d", scene.params.nOpkrUIBrightness, scene.params.nLightSensor, scene.params.nSmoothBrightness, scene.params.nOpkrUIVolumeBoost, scene.params.nOpkrAutoLanechangedelay );
+  //ui_print( s, x_pos, y_pos+0, "%d, %d, %d, %d, %d", scene.params.nOpkrUIBrightness, scene.params.nLightSensor, scene.params.nSmoothBrightness, scene.params.nOpkrUIVolumeBoost, scene.params.nOpkrAutoLanechangedelay );
 
   
      
