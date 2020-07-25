@@ -368,6 +368,7 @@ class Controls:
 
     if self.enabled != self.controlsAllowed and self.controlsAllowed:
       if CS.vEgo > 15*CV.KPH_TO_MS and CS.gearShifter == 2:
+        self.state == State.enabled
         self.enabled = True
         self.active = True
     
