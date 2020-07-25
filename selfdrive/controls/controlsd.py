@@ -141,6 +141,8 @@ class Controls:
     self.current_alert_types = []
 
     self.controlsAllowed = 0
+    self.timer_alloowed = 0
+
 
     self.sm['liveCalibration'].calStatus = Calibration.INVALID
     self.sm['thermal'].freeSpace = 1.
@@ -365,13 +367,15 @@ class Controls:
     # Check if openpilot is engaged
     self.enabled = self.active or self.state == State.preEnabled
 
-
-    if self.enabled != self.controlsAllowed and self.controlsAllowed:
-      if CS.vEgo > 15*CV.KPH_TO_MS and CS.gearShifter == 2:
+    if not self.controlsAllowed:
+      self.timer_alloowed = 0
+    elif self.enabled != self.controlsAllowed:
+      self.timer_alloowed += 1
+      if CS.vEgo > 15*CV.KPH_TO_MS and CS.gearShifter == 2 and self.timer_alloowed > 10:
         self.state = State.enabled
-        self.enabled = True
-        self.active = True
-    
+
+  
+      
   
     print( 'enable={} active={} controlsAllowed={} self.state={}'.format( self.enabled, self.active, self.controlsAllowed, self.state ) )
 
