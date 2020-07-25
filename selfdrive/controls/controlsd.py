@@ -371,7 +371,7 @@ class Controls:
         self.enabled = True
         self.active = True
     
-    #print( 'enable={} active={} controlsAllowed={}'.format( self.enabled, self.active, self.controlsAllowed ) )
+    print( 'enable={} active={} controlsAllowed={} self.state={}'.format( self.enabled, self.active, self.controlsAllowed, self.state ) )
 
   def state_control(self, CS):
     """Given the state, this function returns an actuators packet"""
