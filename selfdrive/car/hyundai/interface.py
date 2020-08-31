@@ -80,12 +80,28 @@ class CarInterface(CarInterfaceBase):
     """
 
     tire_stiffness_factor = 1.
-    ret.steerActuatorDelay = 0.125  # Default delay
-    ret.steerRateCost = 0.5
-    ret.steerLimitTimer = 0.4
+    ret.steerActuatorDelay = 0.3  # Default delay
+    ret.steerRateCost = 0.2
+    ret.steerLimitTimer = 0.8
 
-
-    if candidate == CAR.SANTAFE:
+    if candidate in [CAR.GRANDEUR_HEV, CAR.K7_HEV]:
+      #ret.lateralTuning.init('lqr')
+      #ret.lateralTuning.lqr.scale = 1850.0
+      #ret.lateralTuning.lqr.ki = 0.02
+      #ret.lateralTuning.lqr.a = [0., 1., -0.22619643, 1.21822268]
+      #ret.lateralTuning.lqr.b = [-1.92006585e-04, 3.95603032e-05]
+      #ret.lateralTuning.lqr.c = [1., 0.]
+      #ret.lateralTuning.lqr.k = [-105., 450.]
+      #ret.lateralTuning.lqr.l = [0.30, 0.300]
+      #ret.lateralTuning.lqr.dcGain = 0.003
+      ret.lateralTuning.pid.kf = 0.00004
+      ret.mass = 1675. + STD_CARGO_KG
+      ret.wheelbase = 2.885
+      ret.steerRatio = 12.5
+      ret.steerRateCost = 0.2
+      ret.lateralTuning.pid.kiBP, ret.lateralTuning.pid.kpBP = [[0.], [0.]]
+      ret.lateralTuning.pid.kpV, ret.lateralTuning.pid.kiV = [[0.25], [0.04]]
+    elif candidate == CAR.SANTAFE:
       ret.lateralTuning.pid.kf = 0.00005
       ret.mass = 1830. + STD_CARGO_KG
       ret.wheelbase = 2.765
@@ -133,14 +149,6 @@ class CarInterface(CarInterfaceBase):
     elif candidate in [CAR.GRANDEUR, CAR.K7]:
       ret.lateralTuning.pid.kf = 0.00005
       ret.mass = 1570. + STD_CARGO_KG
-      ret.wheelbase = 2.885
-      ret.steerRatio = 12.5
-      ret.steerRateCost = 0.4
-      ret.lateralTuning.pid.kiBP, ret.lateralTuning.pid.kpBP = [[0.], [0.]]
-      ret.lateralTuning.pid.kpV, ret.lateralTuning.pid.kiV = [[0.25], [0.05]]
-    elif candidate in [CAR.GRANDEUR_HEV, CAR.K7_HEV]:
-      ret.lateralTuning.pid.kf = 0.00005
-      ret.mass = 1675. + STD_CARGO_KG
       ret.wheelbase = 2.885
       ret.steerRatio = 12.5
       ret.steerRateCost = 0.4
@@ -256,10 +264,8 @@ class CarInterface(CarInterfaceBase):
       ret.lateralTuning.pid.kiBP, ret.lateralTuning.pid.kpBP = [[0.], [0.]]
       ret.lateralTuning.pid.kpV, ret.lateralTuning.pid.kiV = [[0.25], [0.05]]
 
-
-
     # 3번 atom param.
-    ret.lateralPIDatom.sRKPHV = [9., 17.]   # 속도. 32~61
+    ret.lateralPIDatom.sRKPHV = [11., 22.]   # 속도. 40~80
   
     ret.lateralPIDatom.sRkBPV = ATOMC.sR_BPV   # 조향각.
     ret.lateralPIDatom.sRBoostV = ATOMC.sR_BoostV
