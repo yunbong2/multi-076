@@ -155,7 +155,7 @@ class CarController():
 
 
     # streer over check
-    if v_ego_kph > 5 and abs( CS.out.steeringTorque ) > 180:  #사용자 핸들 토크
+    if v_ego_kph > 5 and abs( CS.out.steeringTorque ) > 510:  #사용자 핸들 토크
       self.steer_torque_over_timer = 1
     else:
       self.steer_torque_over_timer = 0
@@ -221,8 +221,7 @@ class CarController():
     elif self.steer_torque_ratio > 1:
       self.steer_torque_ratio = 1
 
-
-    print( 'self.steer_torque_ratio={} {}{} self.param_OpkrWhoisDriver={}'.format( self.steer_torque_ratio, ratio_mval, ratio_pval, self.param_OpkrWhoisDriver ) )
+    #print( 'self.steer_torque_ratio={} {}{} self.param_OpkrWhoisDriver={}'.format( self.steer_torque_ratio, ratio_mval, ratio_pval, self.param_OpkrWhoisDriver ) )
 
     return  param
 
@@ -293,7 +292,7 @@ class CarController():
 
 
     # disable if steer angle reach 90 deg, otherwise mdps fault in some models
-    lkas_active = enabled and abs(CS.out.steeringAngle) < 90. #and self.lkas_button
+    lkas_active = enabled and abs(CS.out.steeringAngle) < 180. #and self.lkas_button
 
     # fix for Genesis hard fault at low speed
     #if CS.out.vEgo < 16.666667 and self.car_fingerprint == CAR.GENESIS:
@@ -331,10 +330,12 @@ class CarController():
     #else: # send mdps12 to LKAS to prevent LKAS error if no cancel cmd
     can_sends.append(create_mdps12(self.packer, frame, CS.mdps12))
 
-    str_log1 = 'CV={:5.1f}/{:5.3f} torg:{:5.0f}'.format(  self.model_speed, self.model_sum, apply_steer )
-    str_log2 = 'limit={:.0f} tm={:.1f} '.format( apply_steer_limit, self.timer1.sampleTime()  )
+    #str_log1 = 'CV={:5.1f}/{:5.3f} torg:{:5.0f}'.format(  self.model_speed, self.model_sum, apply_steer )
+    str_log1 = 'CV={:5.1f} torg:{:6.1f}'.format( self.model_speed, apply_steer )
+    #str_log2 = 'limit={:.0f} tm={:.1f} '.format( apply_steer_limit, self.timer1.sampleTime()  )
+    str_log2 = ' limit={:6.1f}/tm={:3.1f} MAX={:5.1f} UP/DN={:3.1f}/{:3.1f} '.format( apply_steer_limit, self.timer1.sampleTime(), self.MAX, self.UP, self.DN )
     trace1.printf( '{} {}'.format( str_log1, str_log2 ) )
-
+    
     run_speed_ctrl = self.param_OpkrAccelProfile and CS.acc_active and self.SC != None
     if not run_speed_ctrl:
       str_log2 = 'U={:.0f}  LK={:.0f} dir={} steer={:5.0f} '.format( CS.Mdps_ToiUnavail, CS.lkas_button_on, self.steer_torque_ratio_dir, CS.out.steeringTorque  )
