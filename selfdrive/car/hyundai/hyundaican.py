@@ -24,6 +24,10 @@ def create_lkas11(packer, frame, car_fingerprint, apply_steer, steer_req,
   if car_fingerprint in [CAR.PALISADE]:
     values["CF_Lkas_Bca_R"] = int(CC.hudControl.leftLaneVisible) + (int(CC.hudControl.rightLaneVisible) << 1)
     values["CF_Lkas_LdwsOpt_USM"] = 2
+  if car_fingerprint == CAR.SONATA_TURBO:
+    values["CF_Lkas_Bca_R"] = 0
+    values["CF_Lkas_FcwOpt_USM"] = 2 if enabled else 1
+    values["CF_Lkas_LdwsOpt_USM"] = 2
 
     # FcwOpt_USM 5 = Orange blinking car + lanes
     # FcwOpt_USM 4 = Orange car + lanes
