@@ -398,10 +398,10 @@ class CarInterface(CarInterfaceBase):
         self.meg_name = EventName.steerTorqueLow
       elif ret.vEgo > MAX_CTRL_SPEED:
         self.meg_name = EventName.speedTooHigh
-      elif ret.steerError:
-        self.meg_name = EventName.steerUnavailable
-      elif ret.steerWarning:
-        self.meg_name = EventName.steerTempUnavailable
+#      elif ret.steerError:
+#        self.meg_name = EventName.steerUnavailable
+#      elif ret.steerWarning:
+#        self.meg_name = EventName.steerTempUnavailable
       else:
         meg_timer = 0
         self.meg_name =  None
