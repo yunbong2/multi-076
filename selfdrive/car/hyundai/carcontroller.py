@@ -155,7 +155,7 @@ class CarController():
 
 
     # streer over check
-    if v_ego_kph > 5 and abs( CS.out.steeringTorque ) > 180:  #사용자 핸들 토크
+    if v_ego_kph > 5 and abs( CS.out.steeringTorque ) > 360:  #사용자 핸들 토크
       self.steer_torque_over_timer = 1
     else:
       self.steer_torque_over_timer = 0
